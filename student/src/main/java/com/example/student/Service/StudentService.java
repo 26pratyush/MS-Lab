@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service     //Remember to annotate
 public class StudentService {
     private final StudentRepository Srep;
 
