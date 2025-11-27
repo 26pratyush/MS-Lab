@@ -5,7 +5,7 @@ import com.example.test.Repository.CarRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Service
+@Service  //remember to annotate
 public class CarService {
 
     //Repository Object
