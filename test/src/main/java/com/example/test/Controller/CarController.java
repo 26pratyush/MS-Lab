@@ -27,7 +27,7 @@ public class CarController {
     }
 
     //GET Request - Read Operation
-    @GetMapping("/get{Cid}")
+    @GetMapping("/get/{Cid}")
     public Car getCarById(@PathVariable int Cid){
         return cs.getCar(Cid);
     }
