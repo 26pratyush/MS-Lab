@@ -1,0 +1,31 @@
+# 2. Demonstrate the updation of image in live container in a pod using command line.
+
+# Same dep.yaml file as Q1
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms22cs107-nginx-deployment
+  namespace: ms22cs107
+  labels:
+    app: ms22cs107-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ms22cs107-nginx
+  template:
+    metadata:
+      labels:
+        app: ms22cs107-nginx
+    spec:
+      containers:
+      - name: nginx
+        image: 172.1.14.168:5001/nginx
+        ports:
+        - containerPort: 80
+
+# Command to create name space: kubectl create namespace ms22cs107
+# Command to deploy: kubectl apply -f dep.yaml
+# Command to check pods: kubectl get pods --namespace=ms22cs107
+# Update Image: kubectl set image deployment/ms22cs107-nginx-deployment nginx=newImageUSN --namespace=ms22cs107
+# Check if Image is updated: kubectl describe deploy usn-nginx-deployment --namespace=ms99cs001 | grep  newImageUSN
