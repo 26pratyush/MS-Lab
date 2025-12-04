@@ -1,0 +1,33 @@
+# 1.Create a simple deployment of the given app with name of your choice and 3 replicas of pods. 
+#Check the status of pod by sending request. App should be accessed from outside the cluster. 
+
+#dep.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms22cs107-nginx-deployment    # Change to your usn, start with ms, not 1
+  namespace: ms22cs107
+  labels:
+    app: ms22cs107-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ms22cs107-nginx
+  template:
+    metadata:
+      labels:
+        app: ms22cs107-nginx
+    spec:
+      containers:
+      - name: nginx
+        image: 172.1.14.168:5001/nginx
+        ports:
+        - containerPort: 80
+
+# Command to create name space: kubectl create namespace ms22cs107
+# Command to deploy: kubectl apply -f dep.yaml
+# Command to check pods: kubectl get pods --namespace=ms22cs107
+# Command to expose: kubectl expose deployment ms22cs107-nginx-deployment --type=NodePort --name=ms22cs107-nginx-service --namespace=ms22cs107
+# To get exposed port: kubectl get svc --namespace=ms22cs107
+# Open the browser and type : http://172.1.14.168:<NodePort>
