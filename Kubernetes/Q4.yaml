@@ -1,0 +1,21 @@
+#4.Create a Pod with ubuntu image and a command to echo “YOUR_NAME” which overrides the default CMD/ENTRYPOINT of the image. Delete pod.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu
+  namespace: ms22cs107
+  labels:
+    app: ubuntu
+spec:
+  containers:
+    - name: ubuntu
+      image: 172.1.14.168:5001/ubuntu
+      command: ["/bin/bash"]
+      args: ["-c", "echo PRATYUSH"]  
+
+# Create Namespace: kubectl create namespace ms22cs107
+# Create Pod: kubectl apply -f dep_ubuntu_pod.yaml --namespace=ms22cs107
+# Show O/P: kubectl logs ubuntu --namespace=ms22cs107
+# Delete Pod: kubectl delete pod ubuntu --namespace=ms22cs107
+# To Confirm: kubectl get pods --namespace=ms22cs107
