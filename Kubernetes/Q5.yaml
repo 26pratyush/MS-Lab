@@ -1,0 +1,24 @@
+# 5. Create a Pod that runs one container. 
+# The configuration file for the Pod defines a command and arguments by using environment variables and then delete the pod.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntunew
+  namespace: ms22cs107
+  labels:
+    app: ubuntunew
+spec:
+  containers:
+  - name: ubuntunew
+    image: 172.1.14.168:5001/ubuntu
+    env:
+      - name: MESSAGE
+        value: "Hello MSRIT"
+    command: ["/bin/sh"]
+    args: ["-c", "echo ${MESSAGE}"]   
+
+# Create Namespace: kubectl create namespace ms22cs107
+# Create Pod: kubectl apply -f dep_ubuntu_pod2.yaml
+# Check output: kubectl logs ubuntunew --namespace=ms22cs107
+# Delete Pod: kubectl delete pod ubuntunew --namespace=ms22cs107
