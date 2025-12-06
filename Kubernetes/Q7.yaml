@@ -1,0 +1,50 @@
+# 7. Create 2 Pods on the same node. Demonstrate Pod to Pod communication through Pod IP.
+
+# pod1_nw.yaml
+kind: Pod
+apiVersion: v1
+metadata:
+  name: testpod1
+spec:
+  containers:
+    - name: c02
+      image: 172.1.14.168:5001/nginx
+      ports:
+        - containerPort: 80
+
+# pod2_nw.yaml
+kind: Pod
+apiVersion: v1
+metadata:
+  name: testpod2
+spec:
+  containers:
+    - name: c03
+      image: 172.1.14.168:5001/httpd
+      ports:
+        - containerPort: 80
+
+# kubectl create namespace ms22cs107
+# kubectl apply --namespace ms22cs107 -f pod1_nw.yml
+# kubectl apply --namespace ms22cs107 -f pod2_nw.yml
+
+# Display the name and IP address of testpod1: kubectl get pod testpod1 --namespace ms22cs107 -o custom-columns=NAME:metadata.name,IP:status.podIP
+
+# Open bash shell inside container c00 of testpod1: kubectl exec --namespace ms22cs107 testpod1 -it -c c00 -- /bin/bash
+# Or Try: kubectl exec --namespace ms22cs107 testpod1 -it -- /bin/bash
+#Inside the shell:
+# apt update
+# apt install curl
+# curl testpod1:80
+# curl localhost:80
+# exit
+
+# kubectl get pod testpod2 --namespace ms22cs107 -o custom-columns=NAME:metadata.name,IP:status.podIP
+# curl <tespod2_ip>:80
+# exit 
+
+# kubectl exec --namespace ms22cs107 testpod2 -it -c c03 -- /bin/bash
+# apt update
+# apt install curl
+# curl <testpod1_ip>:80
+# exit
