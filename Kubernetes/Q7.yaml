@@ -39,7 +39,9 @@ spec:
 # curl localhost:80
 # exit
 
-# kubectl get pod testpod2 --namespace ms22cs107 -o custom-columns=NAME:metadata.name,IP:status.podIP
+# Get IP: kubectl get pod testpod2 --namespace ms22cs107 -o custom-columns=NAME:metadata.name,IP:status.podIP
+# Enter Shell: kubectl exec --namespace ms22cs107 testpod1 -it -c c00 -- /bin/bash 
+# Or try: kubectl exec --namespace ms22cs107 testpod1 -it -- /bin/bash
 # curl <tespod2_ip>:80
 # exit 
 
