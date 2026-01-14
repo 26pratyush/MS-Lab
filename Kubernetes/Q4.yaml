@@ -1,16 +1,16 @@
 #4.Create a Pod with ubuntu image and a command to echo “YOUR_NAME” which overrides the default CMD/ENTRYPOINT of the image. Delete pod.
 
 apiVersion: v1
-kind: Pod
+kind: Pod                       #type of kubernetes object
 metadata:
-  name: ubuntu-pod
+  name: ubuntu-pod              #pod name
   namespace: ms22cs107
   labels:
-    app: ubuntu-label
+    app: ubuntu-label           #pod label
 
 spec:
   containers:
-  - name: ubuntu-container
+  - name: ubuntu-container      #container name
     image: ubuntu
     command: ["/bin/bash"]
     args: ["-c", "echo PRATYUSH"]
