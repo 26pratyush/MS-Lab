@@ -11,7 +11,7 @@ metadata:
 spec:
   containers:
   - name: ubuntu-container      #container name
-    image: ubuntu
+    image: 172.1.14.168:5001/ubuntu
     command: ["/bin/bash"]
     args: ["-c", "echo PRATYUSH"]
 
