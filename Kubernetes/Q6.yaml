@@ -1,6 +1,5 @@
 # 6. Create a manifest file for creating a pod with 2 containers. 
 # Demonstrate container to container communication and display “Ubuntu” container log entry.*/
-#pod_nw.yaml
 
 apiVersion: v1
 kind: Pod
@@ -15,8 +14,8 @@ spec:
   - name: ubuntu-container
     image: ubuntu
     command: ["/bin/bash"]
-    args: [ "-c","echo Ubuntu Container Log Entry..."]
-
+    args: [ "-c","while true; do echo Hello; sleep 5; done"]
+    
   - name: httpd-container
     image: httpd
   
@@ -26,7 +25,7 @@ spec:
 # Create the namespace: kubectl create namespace ms22cs107
 # Add File: kubectl apply -f q6.yaml --namespace=ms22cs107
 # Get the Pod: kubectl get pods --namespace ms22cs107
-# Open bash shell inside container c00 of testpod in namespace: kubectl exec --namespace ms22cs107 pod-q6 -it -c ubuntu-container -- /bin/bash
+# Open bash shell inside ubuntu-container of pod-q6: kubectl exec --namespace ms22cs107 pod-q6 -it -c ubuntu-container -- /bin/bash
 # Update apt: apt update
 # Install curl: apt install curl
 # Send HTTP request: curl localhost:80
