@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table
 public class Flipkart {
     @Id
-    private int id;
+    private Integer id;
 
     @Column
     private String name;
@@ -16,10 +16,10 @@ public class Flipkart {
 
     public Flipkart(){}
 
-    public Flipkart(int d1, String d2, int d3){
-        this.id = d1;
-        this.name = d2;
-        this.price = d3;
+    public Flipkart(int id, String name, int price){
+        this.id = id;
+        this.name = name;
+        this.price = price;
     }
 
     public int getId(){
