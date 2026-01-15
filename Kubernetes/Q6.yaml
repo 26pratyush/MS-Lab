@@ -2,26 +2,33 @@
 # Demonstrate container to container communication and display “Ubuntu” container log entry.*/
 #pod_nw.yaml
 
-kind: Pod
 apiVersion: v1
-metadata:
-  name: testpod
+kind: Pod
+metadata: 
+  name: pod-q6
+  namespace: ms22cs107
+  labels:
+    app: pod-label
+
 spec:
   containers:
-    - name: c00
-      image: 172.1.14.168:5001/ubuntu
-      command: ["/bin/bash", "-c", "while true; do echo Hello; sleep 5; done"]
-    - name: c01
-      image: 172.1.14.168:5001/httpd
-      ports:
-        - containerPort: 80
+  - name: ubuntu-container
+    image: ubuntu
+    command: ["/bin/bash"]
+    args: [ "-c","echo Ubuntu Container Log Entry..."]
+
+  - name: httpd-container
+    image: httpd
+  
+    ports:
+    - containerPort: 80
 
 # Create the namespace: kubectl create namespace ms22cs107
-# Add File: kubectl apply -f pod_nw.yaml
+# Add File: kubectl apply -f q6.yaml --namespace=ms22cs107
 # Get the Pod: kubectl get pods --namespace ms22cs107
-# Open bash shell inside container c00 of testpod in namespace: kubectl exec --namespace ms22cs107 testpod -it -c c00 -- /bin/bash
+# Open bash shell inside container c00 of testpod in namespace: kubectl exec --namespace ms22cs107 pod-q6 -it -c ubuntu-container -- /bin/bash
 # Update apt: apt update
 # Install curl: apt install curl
 # Send HTTP request: curl localhost:80
 # Exit shell: exit
-# Display logs: kubectl logs testpod -c c00 --namespace ms22cs107
+# Display logs: kubectl logs pod-q6 -c ubuntu-container --namespace ms22cs107
