@@ -9,7 +9,7 @@ kubectl run nginx1 --image=172.1.14.168:5001/nginx --restart=Never --labels=app=
 kubectl run nginx2 --image=172.1.14.168:5001/nginx --restart=Never --labels=app=v1 --namespace=ms22cs107
 kubectl run nginx3 --image=172.1.14.168:5001/nginx --restart=Never --labels=app=v1 --namespace=ms22cs107
 
-# Show all labels of the pods: kubectl get po --show-labels --namespace=ms22cs107
-# Get only the 'app=v2' pods: kubectl get po -l app=v2 --namespace=ms22cs107
-# Remove the 'app' label from the pods we created before: kubectl label po nginx1 nginx2 nginx3 app- --namespace=ms22cs107
-# Do show all labels of the pods again to make sure labels are deleted: kubectl get po --show-labels --namespace=ms22cs107
+# Show all labels of the pods: kubectl get pods --namespace=ms22cs107 --show-labels
+# Get only the 'app=v2' pods: kubectl get pods --namespace=ms22cs107 -l app=v2
+# Remove the 'app' label from the pods we created before: kubectl label pods --namespace=ms22cs107 nginx1 nginx2 nginx3 app-
+# Do show all labels of the pods again to make sure labels are deleted: kubectl get pods --namespace=ms22cs107 --show-labels
