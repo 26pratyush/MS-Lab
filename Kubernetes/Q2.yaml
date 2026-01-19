@@ -2,28 +2,28 @@
 
 apiVersion: apps/v1
 kind: Deployment 
-metadata: 
+metadata:
   name: deployment
   namespace: ms22cs107
   labels:
     app: deployment-label
 
 spec:
-  template:    
+  replicas: 3
+  template:
     metadata:
       labels:
         app: pod-label
     spec:
       containers:
       - name: nginx-container
-        image: nginx
+        image: 172.1.14.168:5001/nginx
         ports:
         - containerPort: 80
-        
-  replicas: 3
+  
   selector:
-      matchLabels:
-        app: pod-label        
+    matchLabels:
+      app: pod-label     
 
 
 # Command to create name space: kubectl create namespace ms22cs107
